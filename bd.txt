@@ -1,0 +1,46 @@
+Create table articulo(
+codigoArticulo int not null,
+nombre varchar(200) not null,
+precio int not null,
+imagen varchar(200) not null,
+primary key (codigoArticulo)
+);
+insert into articulo values(1,'Cuadernos',500,'Cuadernos.png'),
+(2,'Estuche',1500,'Estuche.png'),
+(3,'Goma de borrar',300,'Gomadeborrar.jpg'),
+(4,'Lapices',800,'Lapices.jpg'),
+(5,'Pegamento',1000,'Pegamento.jpg'),
+(6,'Plumones',650,'Plumones.png'),
+(7,'Temperas',1300,'Temperas.png'),
+(8,'Tijeras',700,'Tijeras.png');
+create table usuarios(
+codigoUsuario int not null auto_increment,
+apellidoUsuario varchar(100) not null,
+nombreUsuario varchar(100) not null,
+ciudad varchar(100) not null,
+perfil varchar(100) not null,
+correo varchar(50) not null,
+claveUsuario varchar(20) not null,
+primary key (codigoUsuario)
+);
+insert into usuarios values(1,'Herrera','Diego','Santiago','Admin','die.herreraf@alumnos.duoc.cl','123456'),
+(2,'Fuentes','Rodrigo','Santiago','Cliente','rod.fuentes@alumnos.duoc.cl','123456'),
+(3,'kease','Ola','Valparaiso','Cliente','Ola.Kase@alumnos.duoc.cl','123456');
+Create table venta(
+codigoVenta int not null,
+cliente varchar(100) not null,
+fecha datetime not null,
+primary key (codigoVenta)
+);
+insert into venta values(1,'rodrigo Fuentes','2018-11-26 00:00:00');
+Create table detalleventa(
+codigoVenta int not null,
+codigoArticulo int not null,
+cantidad int not null,
+descuento int not null,
+primary key (codigoVenta,codigoArticulo),
+key fk_DetalleVenta_Articulo (codigoArticulo),
+constraint FK_DetalleVenta_Articulo foreign key (codigoArticulo) references articulo (codigoArticulo),
+constraint FK_DetalleVenta_Venta foreign key (codigoVenta) references venta (codigoVenta)
+);
+insert into detalleventa values (1,2,3,500);
